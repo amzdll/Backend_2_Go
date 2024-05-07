@@ -1,4 +1,4 @@
-create table address
+create table if not exists address
 (
     id      uuid primary key unique,
     country varchar(255) not null,
@@ -6,7 +6,7 @@ create table address
     street  varchar(255) not null
 );
 
-create table client
+create table if not exists client
 (
     id                uuid primary key unique,
     client_name       varchar(255) not null,
@@ -20,13 +20,13 @@ create table client
         foreign key (address_id) references address (id)
 );
 
-create table images
+create table if not exists images
 (
     id    uuid primary key unique,
     image bytea
 );
 
-create table supplier
+create table if not exists supplier
 (
     id           uuid primary key unique,
     name         varchar(255) not null,
@@ -40,7 +40,7 @@ create table supplier
             )
 );
 
-create table product
+create table if not exists product
 (
     id               uuid primary key unique,
     name             varchar(255) not null,
