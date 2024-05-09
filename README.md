@@ -2,3 +2,4 @@
 
 
 
+git config --global user.name "amzdll "
