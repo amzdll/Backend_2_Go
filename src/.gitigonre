@@ -11,3 +11,9 @@
 go.work
 
 .idea
+
+address.go
+client.go
+images.go
+product.go
+supplier.go

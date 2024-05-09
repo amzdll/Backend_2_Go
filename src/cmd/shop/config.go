@@ -1,1 +1,1 @@
-package shop
+package main
