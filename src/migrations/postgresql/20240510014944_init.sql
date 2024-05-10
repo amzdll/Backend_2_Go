@@ -1,3 +1,4 @@
+-- +goose Up
 create table if not exists address
 (
     id      uuid primary key unique,
@@ -47,7 +48,7 @@ create table if not exists product
     category         varchar(255) not null,
     price            money,
     available_stock  integer,
-    last_update_date timestamp    not null,
+    last_update_date timestamp default now(),
     supplier_id      uuid         not null,
     image_id         uuid         not null,
 
@@ -58,4 +59,11 @@ create table if not exists product
         foreign key (image_id) references address (id)
 );
 
+
+-- +goose Down
+drop table if exists client cascade;
+drop table if exists product cascade;
+drop table if exists supplier cascade;
+drop table if exists address cascade;
+drop table if exists images cascade;
 
