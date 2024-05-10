@@ -17,3 +17,5 @@ client.go
 images.go
 product.go
 supplier.go
+
+bin/*
