@@ -4,6 +4,6 @@ import (
 	"net/http"
 )
 
-func (h *Handler) CreateClient(w http.ResponseWriter, _ *http.Request) {
+func (h *Handler) GetAll(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello, World!"))
 }

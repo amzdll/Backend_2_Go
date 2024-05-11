@@ -6,11 +6,11 @@ import (
 )
 
 type CreateClientRequest struct {
-	Id               uuid.UUID
-	ClientName       string
-	ClientSurname    string
-	Birthday         time.Time
-	Gender           string
-	RegistrationDate time.Time
-	AddressId        uuid.UUID
+	Id               uuid.UUID `json:"id,omitempty"`
+	ClientName       string    `json:"client_name,omitempty"`
+	ClientSurname    string    `json:"client_surname,omitempty"`
+	Birthday         time.Time `json:"birthday"`
+	Gender           string    `json:"gender,omitempty"`
+	RegistrationDate time.Time `json:"registration_date"`
+	AddressId        uuid.UUID `json:"address_id,omitempty"`
 }
