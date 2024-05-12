@@ -1,20 +1,25 @@
 package client
 
 import (
+	"context"
+	"github.com/amzdll/backend_2_go/src/internal/model"
 	"github.com/go-chi/chi/v5"
+	"github.com/go-playground/validator/v10"
 )
 
 type Service interface {
-	ClientHello() string
+	Create(ctx context.Context, clientInfo model.ClientInfo) error
 }
 
 type Handler struct {
-	service Service
+	service   Service
+	validator *validator.Validate
 }
 
-func NewHandler(s Service) *Handler {
+func NewHandler(service Service, validator *validator.Validate) *Handler {
 	return &Handler{
-		service: s,
+		service:   service,
+		validator: validator,
 	}
 }
 

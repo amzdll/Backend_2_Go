@@ -1,4 +1,7 @@
 -- +goose Up
+create extension if not exists "uuid-ossp";
+
+
 create table if not exists address
 (
     id      uuid primary key unique,
@@ -9,7 +12,7 @@ create table if not exists address
 
 create table if not exists client
 (
-    id                uuid primary key unique,
+    id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     client_name       varchar(255) not null,
     client_surname    varchar(255) not null,
     birthday          timestamp    not null,
