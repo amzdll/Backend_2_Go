@@ -6,11 +6,13 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/render"
 	"github.com/go-playground/validator/v10"
+	"github.com/google/uuid"
 )
 
 type Service interface {
 	Create(ctx context.Context, clientInfo model.ClientInfo) error
 	GetAll(ctx context.Context, clientListParams model.ClientListParams) ([]model.Client, error)
+	DeleteById(ctx context.Context, id uuid.UUID) error
 }
 
 type Handler struct {
@@ -33,7 +35,7 @@ func (h *Handler) Routes() *chi.Mux {
 	r.Get("/clients/{name}_{surname}", h.GetByNameSurname)
 	r.Get("/clients", h.GetAll)
 	r.Put("/clients", h.UpdateAddress)
-	r.Delete("/clients", h.DeleteById)
+	r.Delete("/clients/{id}", h.DeleteById)
 
 	return r
 }

@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"github.com/amzdll/backend_2_go/src/internal/model"
+	"github.com/google/uuid"
 )
 
 type ClientRepository interface {
@@ -10,7 +11,7 @@ type ClientRepository interface {
 	//GetByNameSurname() (*model.Client, error)
 	GetAll(ctx context.Context, clientListParams model.ClientListParams) ([]model.Client, error)
 	//UpdateAddress() error
-	//DeleteById() error
+	DeleteById(ctx context.Context, id uuid.UUID) error
 }
 
 type ClientService struct {

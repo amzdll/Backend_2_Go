@@ -16,12 +16,11 @@ type Client struct {
 }
 
 type ClientInfo struct {
-	ClientName       string
-	ClientSurname    string
-	Birthday         time.Time
-	Gender           string
-	RegistrationDate time.Time
-	AddressId        uuid.UUID
+	ClientName    string
+	ClientSurname string
+	Birthday      time.Time
+	Gender        string
+	AddressId     uuid.UUID
 }
 
 type ClientListParams struct {

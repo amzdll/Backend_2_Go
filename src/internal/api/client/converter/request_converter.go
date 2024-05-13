@@ -7,12 +7,11 @@ import (
 
 func ToClientInfoFromRequest(clientReq request.CreateClientRequest) model.ClientInfo {
 	return model.ClientInfo{
-		ClientName:       clientReq.ClientName,
-		ClientSurname:    clientReq.ClientSurname,
-		Birthday:         clientReq.Birthday,
-		Gender:           clientReq.Gender,
-		RegistrationDate: clientReq.RegistrationDate,
-		AddressId:        clientReq.AddressId,
+		ClientName:    clientReq.ClientName,
+		ClientSurname: clientReq.ClientSurname,
+		Birthday:      clientReq.Birthday,
+		Gender:        clientReq.Gender,
+		AddressId:     clientReq.AddressId,
 	}
 }
 

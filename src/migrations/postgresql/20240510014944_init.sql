@@ -4,7 +4,7 @@ create extension if not exists "uuid-ossp";
 
 create table if not exists address
 (
-    id      uuid primary key unique,
+    id      uuid default uuid_generate_v4() unique,
     country varchar(255) not null,
     city    varchar(255) not null,
     street  varchar(255) not null
@@ -12,12 +12,12 @@ create table if not exists address
 
 create table if not exists client
 (
-    id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id                uuid primary key default uuid_generate_v4() unique,
     client_name       varchar(255) not null,
     client_surname    varchar(255) not null,
     birthday          timestamp    not null,
     gender            varchar(255) not null,
-    registration_date timestamp    not null,
+    registration_date timestamp        default now(),
     address_id        uuid         not null,
 
     constraint fk_address_id_address
