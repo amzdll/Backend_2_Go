@@ -15,3 +15,10 @@ func ToClientInfoFromRequest(clientReq request.CreateClientRequest) model.Client
 		AddressId:        clientReq.AddressId,
 	}
 }
+
+func ToClientListParamsFromRequest(clientReq request.GetAllRequest) model.ClientListParams {
+	return model.ClientListParams{
+		Limit:  clientReq.Limit,
+		Offset: clientReq.Offset,
+	}
+}

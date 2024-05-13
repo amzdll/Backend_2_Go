@@ -1,0 +1,6 @@
+moving configuration from main.go application to internal/app
+documentation generation
+swagger generation
+migrating the project to docker
+adding middleware for data validation from r.Body
+(possibly) changing the handle parameters from r http.Request to r entityRequest

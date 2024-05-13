@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/amzdll/backend_2_go/src/internal/model"
+	"github.com/georgysavva/scany/v2/pgxscan"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
@@ -20,10 +21,19 @@ func (repository ClientRepository) Create(ctx context.Context, client model.Clie
 	query := fmt.Sprintf("INSERT INTO %s "+
 		"(client_name, client_surname, birthday, gender, registration_date, address_id) "+
 		"VALUES ($1, $2, $3, $4, $5, $6)", repository.tableName)
+
 	_, err := repository.db.Exec(ctx, query,
 		client.ClientName, client.ClientSurname, client.Birthday, client.Gender, client.RegistrationDate, client.AddressId)
-	if err != nil {
-		return err
+
+	return err
+}
+
+func (repository ClientRepository) GetAll(ctx context.Context, clientListParams model.ClientListParams) ([]model.Client, error) {
+	var clients []model.Client
+	query := `select * from client`
+
+	if err := pgxscan.Select(ctx, repository.db, &clients, query); err != nil {
+		return nil, err
 	}
-	return nil
+	return clients, nil
 }

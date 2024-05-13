@@ -23,3 +23,8 @@ type ClientInfo struct {
 	RegistrationDate time.Time
 	AddressId        uuid.UUID
 }
+
+type ClientListParams struct {
+	Limit  uint64
+	Offset uint64
+}

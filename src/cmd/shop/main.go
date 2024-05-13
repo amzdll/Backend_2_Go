@@ -28,7 +28,6 @@ func main() {
 	validate := validator.New()
 
 	app := chi.NewRouter()
-
 	clientRepo := clientRepository.NewRepository(pool)
 	clientServ := clientService.NewClientService(clientRepo)
 	clientHandler := client.NewHandler(clientServ, validate)
