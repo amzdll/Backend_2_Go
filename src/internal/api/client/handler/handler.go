@@ -11,7 +11,8 @@ import (
 
 type Service interface {
 	Create(ctx context.Context, clientInfo model.ClientInfo) error
-	GetAll(ctx context.Context, clientListParams model.ClientListParams) ([]model.Client, error)
+	GetByNameSurname(ctx context.Context, clientInfo model.ClientInfo) ([]model.Client, error)
+	GetAll(ctx context.Context, pagination model.Pagination) ([]model.Client, error)
 	DeleteById(ctx context.Context, id uuid.UUID) error
 }
 
@@ -32,7 +33,7 @@ func (h *Handler) Routes() *chi.Mux {
 	r.Use(render.SetContentType(render.ContentTypeJSON))
 
 	r.Post("/clients", h.Create)
-	r.Get("/clients/{name}_{surname}", h.GetByNameSurname)
+	r.Get("/clients/{name}&{surname}", h.GetByNameSurname)
 	r.Get("/clients", h.GetAll)
 	r.Put("/clients", h.UpdateAddress)
 	r.Delete("/clients/{id}", h.DeleteById)

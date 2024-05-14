@@ -8,8 +8,8 @@ import (
 
 type ClientRepository interface {
 	Create(ctx context.Context, clientInfo model.ClientInfo) error
-	//GetByNameSurname() (*model.Client, error)
-	GetAll(ctx context.Context, clientListParams model.ClientListParams) ([]model.Client, error)
+	GetByNameSurname(ctx context.Context, clientInfo model.ClientInfo) ([]model.Client, error)
+	GetAll(ctx context.Context, pagination model.Pagination) ([]model.Client, error)
 	//UpdateAddress() error
 	DeleteById(ctx context.Context, id uuid.UUID) error
 }

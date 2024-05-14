@@ -9,12 +9,11 @@ import (
 )
 
 type ClientRepository struct {
-	tableName string
-	db        *pgxpool.Pool
+	db *pgxpool.Pool
 }
 
 func NewRepository(db *pgxpool.Pool) *ClientRepository {
-	return &ClientRepository{tableName: "client", db: db}
+	return &ClientRepository{db: db}
 }
 
 func (repository ClientRepository) Create(ctx context.Context, client model.ClientInfo) error {
@@ -27,11 +26,26 @@ func (repository ClientRepository) Create(ctx context.Context, client model.Clie
 	return err
 }
 
-func (repository ClientRepository) GetAll(ctx context.Context, clientListParams model.ClientListParams) ([]model.Client, error) {
-	query := `select * from client`
+func (repository ClientRepository) GetByNameSurname(
+	ctx context.Context, clientInfo model.ClientInfo,
+) ([]model.Client, error) {
+	query := `select * from client where client_name = $1 and client_surname = $2`
 	var clients []model.Client
 
-	if err := pgxscan.Select(ctx, repository.db, &clients, query); err != nil {
+	err := pgxscan.Select(
+		ctx, repository.db, &clients, query, clientInfo.ClientName, clientInfo.ClientSurname)
+	if err != nil {
+		return nil, err
+	}
+
+	return clients, nil
+}
+
+func (repository ClientRepository) GetAll(ctx context.Context, pagination model.Pagination) ([]model.Client, error) {
+	query := `select * from client limit $1 offset $2`
+	var clients []model.Client
+
+	if err := pgxscan.Select(ctx, repository.db, &clients, query, pagination.Limit, pagination.Offset); err != nil {
 		return nil, err
 	}
 
@@ -39,10 +53,7 @@ func (repository ClientRepository) GetAll(ctx context.Context, clientListParams 
 }
 
 func (repository ClientRepository) DeleteById(ctx context.Context, id uuid.UUID) error {
-	//query := `delete from client
-	//  				where id = $1`
-	//
-	//_, err := repository.db.Exec(ctx, query, id)
-	//return err
-	return nil
+	query := `delete from client where id = $1`
+	_, err := repository.db.Exec(ctx, query, id)
+	return err
 }

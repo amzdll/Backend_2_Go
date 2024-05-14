@@ -15,8 +15,8 @@ func ToClientInfoFromRequest(clientReq request.CreateClientRequest) model.Client
 	}
 }
 
-func ToClientListParamsFromRequest(clientReq request.GetAllRequest) model.ClientListParams {
-	return model.ClientListParams{
+func ToClientListParamsFromRequest(clientReq request.GetAllRequest) model.Pagination {
+	return model.Pagination{
 		Limit:  clientReq.Limit,
 		Offset: clientReq.Offset,
 	}

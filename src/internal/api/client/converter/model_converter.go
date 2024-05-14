@@ -5,7 +5,7 @@ import (
 	"github.com/amzdll/backend_2_go/src/internal/model"
 )
 
-func ToClientResponseFromModel(clientModel model.Client) response.ClientResponse {
+func ModelToClientResponse(clientModel model.Client) response.ClientResponse {
 	return response.ClientResponse{
 		Id:               clientModel.Id,
 		ClientName:       clientModel.ClientName,

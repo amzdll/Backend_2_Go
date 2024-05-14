@@ -2,22 +2,20 @@ package handler
 
 import (
 	"github.com/amzdll/backend_2_go/src/internal/api/client/converter"
-	"github.com/amzdll/backend_2_go/src/internal/api/client/request"
 	"github.com/amzdll/backend_2_go/src/internal/api/client/response"
-	"github.com/go-chi/render"
+	commonConverter "github.com/amzdll/backend_2_go/src/internal/api/common/converter"
 	"github.com/nicklaw5/go-respond"
 	"net/http"
 )
 
 func (h *Handler) GetAll(w http.ResponseWriter, r *http.Request) {
-	var req request.GetAllRequest
-
-	if err := render.Decode(r, &req); err != nil {
+	pagination, err := commonConverter.RequestToPaginationModel(r)
+	if err != nil {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
-	// refactor converter.ToClientListParamsFromRequest(req) -> limit, offset
-	clients, err := h.service.GetAll(r.Context(), converter.ToClientListParamsFromRequest(req))
+
+	clients, err := h.service.GetAll(r.Context(), pagination)
 	if err != nil {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
@@ -25,7 +23,7 @@ func (h *Handler) GetAll(w http.ResponseWriter, r *http.Request) {
 
 	res := make([]response.ClientResponse, len(clients))
 	for i, client := range clients {
-		res[i] = converter.ToClientResponseFromModel(client)
+		res[i] = converter.ModelToClientResponse(client)
 	}
 	respond.NewResponse(w).DefaultMessage().Ok(res)
 }

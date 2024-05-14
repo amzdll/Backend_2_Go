@@ -18,6 +18,5 @@ func (h *Handler) DeleteById(w http.ResponseWriter, r *http.Request) {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
-	//fmt.Println(err)
-	//respond.NewResponse(w).DefaultMessage().Ok(nil)
+	respond.NewResponse(w).DefaultMessage().Ok(nil)
 }

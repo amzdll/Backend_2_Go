@@ -6,5 +6,5 @@ import (
 )
 
 func (service ClientService) DeleteById(ctx context.Context, id uuid.UUID) error {
-	return service.DeleteById(ctx, id)
+	return service.repository.DeleteById(ctx, id)
 }

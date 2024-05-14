@@ -19,6 +19,7 @@ func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := h.validator.Struct(req); err != nil {
+		fmt.Println(err)
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}

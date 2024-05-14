@@ -22,8 +22,3 @@ type ClientInfo struct {
 	Gender        string
 	AddressId     uuid.UUID
 }
-
-type ClientListParams struct {
-	Limit  uint64
-	Offset uint64
-}
