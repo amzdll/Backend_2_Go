@@ -1,6 +1,6 @@
 package request
 
 type GetAllRequest struct {
-	Limit  int `json:"limit,omitempty"`
-	Offset int `json:"offset,omitempty"`
+	Limit  int `queryparam:"limit" validate:"required"`
+	Offset int `queryparam:"offset" validate:"required"`
 }

@@ -14,14 +14,18 @@ func RequestToPaginationModel(r *http.Request) (model.Pagination, error) {
 	limitStr := r.URL.Query().Get("limit")
 	offsetStr := r.URL.Query().Get("offset")
 
-	limit, err = strconv.Atoi(limitStr)
-	if err != nil && limitStr != "" {
-		return model.Pagination{}, err
+	if limitStr != "" {
+		limit, err = strconv.Atoi(limitStr)
+		if err != nil {
+			return model.Pagination{}, err
+		}
 	}
 
-	offset, err = strconv.Atoi(offsetStr)
-	if err != nil && offsetStr != "" {
-		return model.Pagination{}, err
+	if offsetStr != "" {
+		offset, err = strconv.Atoi(offsetStr)
+		if err != nil {
+			return model.Pagination{}, err
+		}
 	}
 
 	return model.Pagination{

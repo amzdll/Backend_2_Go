@@ -33,8 +33,8 @@ func (h *Handler) Routes() *chi.Mux {
 	r.Use(render.SetContentType(render.ContentTypeJSON))
 
 	r.Post("/clients", h.Create)
-	r.Get("/clients/{name}&{surname}", h.GetByNameSurname)
 	r.Get("/clients", h.GetAll)
+	r.Get("/client", h.GetByNameSurname)
 	r.Put("/clients", h.UpdateAddress)
 	r.Delete("/clients/{id}", h.DeleteById)
 

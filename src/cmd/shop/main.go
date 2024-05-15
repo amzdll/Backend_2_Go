@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	client "github.com/amzdll/backend_2_go/src/internal/api/client/handler"
-	clientRepository "github.com/amzdll/backend_2_go/src/internal/repository/client"
+	clientRepository "github.com/amzdll/backend_2_go/src/internal/db/client/repository"
 	clientService "github.com/amzdll/backend_2_go/src/internal/service/client"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-playground/validator/v10"

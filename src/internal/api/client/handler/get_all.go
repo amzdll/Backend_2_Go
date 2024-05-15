@@ -14,7 +14,6 @@ func (h *Handler) GetAll(w http.ResponseWriter, r *http.Request) {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
-
 	clients, err := h.service.GetAll(r.Context(), pagination)
 	if err != nil {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
