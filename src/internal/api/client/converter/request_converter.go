@@ -5,7 +5,7 @@ import (
 	"github.com/amzdll/backend_2_go/src/internal/model"
 )
 
-func ToClientInfoFromRequest(clientReq request.CreateClientRequest) model.ClientInfo {
+func ToClientInfoFromRequest(clientReq request.CreationRequest) model.ClientInfo {
 	return model.ClientInfo{
 		ClientName:    clientReq.ClientName,
 		ClientSurname: clientReq.ClientSurname,

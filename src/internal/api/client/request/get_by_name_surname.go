@@ -1,6 +1,6 @@
 package request
 
-type GetByNameSurnameRequest struct {
+type ClientByNameSurnameRequest struct {
 	Name    string
 	Surname string
 }

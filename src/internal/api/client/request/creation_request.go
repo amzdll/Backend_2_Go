@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type CreateClientRequest struct {
+type CreationRequest struct {
 	ClientName    string    `json:"name" validate:"required"`
 	ClientSurname string    `json:"surname" validate:"required"`
 	Birthday      time.Time `json:"birthday" validate:"required"`

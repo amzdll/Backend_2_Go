@@ -11,7 +11,7 @@ import (
 )
 
 func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
-	var req request.CreateClientRequest
+	var req request.CreationRequest
 
 	if err := render.DecodeJSON(r.Body, &req); err != nil {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
