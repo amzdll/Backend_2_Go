@@ -3,14 +3,13 @@ package handler
 import (
 	"github.com/amzdll/backend_2_go/src/internal/api/client/converter"
 	"github.com/amzdll/backend_2_go/src/internal/api/client/request"
-	"github.com/nicklaw5/go-respond"
-
 	"github.com/go-chi/render"
+	"github.com/nicklaw5/go-respond"
 	"net/http"
 )
 
-func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
-	var req request.CreationRequest
+func (h *Handler) UpdateAddress(w http.ResponseWriter, r *http.Request) {
+	var req request.UpdationRequest
 	if err := render.DecodeJSON(r.Body, &req); err != nil {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
@@ -19,9 +18,9 @@ func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
-	if err := h.service.Create(r.Context(), converter.ToClientInfoFromRequest(req)); err != nil {
+	if err := h.service.UpdateClient(r.Context(), converter.ToClientFromUpdateAddressRequest(req)); err != nil {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
-	respond.NewResponse(w).DefaultMessage().Created(nil)
+	respond.NewResponse(w).DefaultMessage().Ok(nil)
 }

@@ -7,10 +7,10 @@ import (
 )
 
 type ClientRepository interface {
-	Create(ctx context.Context, clientInfo model.ClientInfo) error
-	GetByNameSurname(ctx context.Context, clientInfo model.ClientInfo) ([]model.Client, error)
+	Create(ctx context.Context, data model.ClientInfo) error
+	GetByNameSurname(ctx context.Context, data model.ClientInfo) ([]model.Client, error)
 	GetAll(ctx context.Context, pagination model.Pagination) ([]model.Client, error)
-	//UpdateAddress() error
+	UpdateAddress(ctx context.Context, data model.Client) error
 	DeleteById(ctx context.Context, id uuid.UUID) error
 }
 
@@ -18,6 +18,6 @@ type ClientService struct {
 	repository ClientRepository
 }
 
-func NewClientService(repository ClientRepository) *ClientService {
-	return &ClientService{repository: repository}
+func NewClientService(cr ClientRepository) *ClientService {
+	return &ClientService{repository: cr}
 }

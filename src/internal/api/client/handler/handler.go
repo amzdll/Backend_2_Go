@@ -10,9 +10,10 @@ import (
 )
 
 type Service interface {
-	Create(ctx context.Context, clientInfo model.ClientInfo) error
-	GetByNameSurname(ctx context.Context, clientInfo model.ClientInfo) ([]model.Client, error)
+	Create(ctx context.Context, data model.ClientInfo) error
+	GetByNameSurname(ctx context.Context, data model.ClientInfo) ([]model.Client, error)
 	GetAll(ctx context.Context, pagination model.Pagination) ([]model.Client, error)
+	UpdateClient(ctx context.Context, data model.Client) error
 	DeleteById(ctx context.Context, id uuid.UUID) error
 }
 
@@ -21,10 +22,10 @@ type Handler struct {
 	validator *validator.Validate
 }
 
-func NewHandler(service Service, validator *validator.Validate) *Handler {
+func NewHandler(s Service, v *validator.Validate) *Handler {
 	return &Handler{
-		service:   service,
-		validator: validator,
+		service:   s,
+		validator: v,
 	}
 }
 

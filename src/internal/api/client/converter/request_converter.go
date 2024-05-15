@@ -5,7 +5,7 @@ import (
 	"github.com/amzdll/backend_2_go/src/internal/model"
 )
 
-func ToClientInfoFromRequest(clientReq request.CreateClientRequest) model.ClientInfo {
+func ToClientInfoFromRequest(clientReq request.CreationRequest) model.ClientInfo {
 	return model.ClientInfo{
 		ClientName:    clientReq.ClientName,
 		ClientSurname: clientReq.ClientSurname,
@@ -15,9 +15,9 @@ func ToClientInfoFromRequest(clientReq request.CreateClientRequest) model.Client
 	}
 }
 
-func ToClientListParamsFromRequest(clientReq request.GetAllRequest) model.Pagination {
-	return model.Pagination{
-		Limit:  clientReq.Limit,
-		Offset: clientReq.Offset,
+func ToClientFromUpdateAddressRequest(clientReq request.UpdationRequest) model.Client {
+	return model.Client{
+		Id:        clientReq.Id,
+		AddressId: clientReq.AddressId,
 	}
 }
