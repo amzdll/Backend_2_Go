@@ -1,0 +1,12 @@
+application:
+  host: "127.0.0.1"
+  port: ":8000"
+
+pg:
+  name: "backend_1"
+  user: "postgres"
+  password: "postgres"
+  host: "127.0.0.1"
+  port: "5432"
+  ssl_mode: "disable"
+  dsn_template: "host=%s port=%s dbname=%s user=%s password=%s sslmode=%s"

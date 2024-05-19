@@ -8,6 +8,6 @@ type ClientRepository struct {
 	db *pgxpool.Pool
 }
 
-func NewRepository(db *pgxpool.Pool) *ClientRepository {
+func New(db *pgxpool.Pool) *ClientRepository {
 	return &ClientRepository{db: db}
 }

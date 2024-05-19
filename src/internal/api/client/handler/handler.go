@@ -22,7 +22,7 @@ type Handler struct {
 	validator *validator.Validate
 }
 
-func NewHandler(s Service, v *validator.Validate) *Handler {
+func New(s Service, v *validator.Validate) *Handler {
 	return &Handler{
 		service:   s,
 		validator: v,
