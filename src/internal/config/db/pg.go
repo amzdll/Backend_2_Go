@@ -1,4 +1,4 @@
-package dbfx
+package db
 
 import (
 	"go.uber.org/config"

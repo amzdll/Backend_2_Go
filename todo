@@ -1,4 +1,3 @@
-moving configuration from main.go application to internal/app
 documentation generation
 swagger generation
 migrating the project to docker

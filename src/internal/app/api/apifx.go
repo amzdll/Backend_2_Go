@@ -1,10 +1,8 @@
-package apifx
+package api
 
 import (
 	"context"
-	clientHandler "github.com/amzdll/backend_2_go/src/internal/api/client/handler"
-	clientRepository "github.com/amzdll/backend_2_go/src/internal/db/client/repository"
-	clientService "github.com/amzdll/backend_2_go/src/internal/service/client"
+	"github.com/amzdll/backend_2_go/src/internal/config"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-playground/validator/v10"
 	"go.uber.org/fx"
@@ -16,16 +14,10 @@ func Module() fx.Option {
 	return fx.Module(
 		"server",
 
-		// Clients
-		fx.Provide(
-			fx.Annotate(clientRepository.New, fx.As(new(clientService.Repository))),
-			fx.Annotate(clientService.New, fx.As(new(clientHandler.Service))),
-			AsRoute(clientHandler.New),
-		),
+		fx.Options(ClientModule()),
 
-		// Common
 		fx.Provide(
-			NewConfig,
+			config.NewApiConfig,
 			NewValidator,
 			fx.Annotate(MountHandlers, fx.ParamTags(`group:"routes"`)),
 		),
@@ -33,7 +25,7 @@ func Module() fx.Option {
 	)
 }
 
-func StartServer(lc fx.Lifecycle, router *chi.Mux, config *Config) {
+func StartServer(lc fx.Lifecycle, router *chi.Mux, config *config.ApiConfig) {
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			err := http.ListenAndServe(config.Port, router)

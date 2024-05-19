@@ -1,14 +1,14 @@
-package apifx
+package config
 
 import "go.uber.org/config"
 
-type Config struct {
+type ApiConfig struct {
 	Host string `yaml:"host"`
 	Port string `yaml:"port"`
 }
 
-func NewConfig(provider config.Provider) (*Config, error) {
-	var c Config
+func NewApiConfig(provider config.Provider) (*ApiConfig, error) {
+	var c ApiConfig
 	if err := provider.Get("application").Populate(&c); err != nil {
 		return nil, err
 	}
