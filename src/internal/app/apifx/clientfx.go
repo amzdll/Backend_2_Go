@@ -1,4 +1,4 @@
-package api
+package apifx
 
 import (
 	clientHandler "github.com/amzdll/backend_2_go/src/internal/api/client/handler"

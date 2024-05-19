@@ -6,7 +6,7 @@ import (
 )
 
 func (repository ClientRepository) DeleteById(ctx context.Context, id uuid.UUID) error {
-	query := `delete from client where id = $1`
+	const query = `delete from client where id = $1`
 	_, err := repository.db.Exec(ctx, query, id)
 	return err
 }

@@ -7,7 +7,7 @@ import (
 )
 
 func (repository ClientRepository) GetAll(ctx context.Context, pagination model.Pagination) ([]model.Client, error) {
-	query := `select * from client limit $1 offset $2`
+	const query = `select * from client limit $1 offset $2`
 	var clients []model.Client
 	if err := pgxscan.Select(ctx, repository.db, &clients, query, pagination.Limit, pagination.Offset); err != nil {
 		return nil, err

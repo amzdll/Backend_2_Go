@@ -15,8 +15,9 @@ type ResultConfig struct {
 	Config   Config
 }
 
+// NewConfig todo: need relative path
 func NewConfig() (ResultConfig, error) {
-	loader, err := config.NewYAML(config.File("config.yaml"))
+	loader, err := config.NewYAML(config.File("src/config/config.yaml"))
 	if err != nil {
 		return ResultConfig{}, err
 	}
