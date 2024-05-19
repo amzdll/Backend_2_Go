@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type ClientRepository interface {
+type Repository interface {
 	Create(ctx context.Context, data model.ClientInfo) error
 	GetByNameSurname(ctx context.Context, data model.ClientInfo) ([]model.Client, error)
 	GetAll(ctx context.Context, pagination model.Pagination) ([]model.Client, error)
@@ -15,9 +15,9 @@ type ClientRepository interface {
 }
 
 type ClientService struct {
-	repository ClientRepository
+	repository Repository
 }
 
-func New(cr ClientRepository) *ClientService {
+func New(cr Repository) *ClientService {
 	return &ClientService{repository: cr}
 }
