@@ -18,10 +18,7 @@ func Module() fx.Option {
 
 		fx.Provide(
 			NewConfig,
-			fx.Annotate(
-				MountHandlers,
-				fx.ParamTags(`group:"routes"`),
-			),
+			fx.Annotate(MountHandlers, fx.ParamTags(`group:"routes"`)),
 		),
 		fx.Invoke(StartServer),
 	)
@@ -29,11 +26,14 @@ func Module() fx.Option {
 
 func StartServer(lc fx.Lifecycle, router *chi.Mux, config *Config) {
 	lc.Append(fx.Hook{
-		OnStart: func(context.Context) error {
+		OnStart: func(ctx context.Context) error {
 			err := http.ListenAndServe(config.Port, router)
 			if err != nil {
 				log.Fatalf("Ошибка проверки соединения с базой данных: %v", err)
 			}
+			return nil
+		},
+		OnStop: func(context context.Context) error {
 			return nil
 		},
 	})
