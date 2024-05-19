@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/amzdll/backend_2_go/src/internal/api/client/converter"
 	"github.com/amzdll/backend_2_go/src/internal/api/client/response"
 	commonConverter "github.com/amzdll/backend_2_go/src/internal/api/common/converter"
@@ -12,11 +13,13 @@ import (
 func (h *Handler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := commonConverter.RequestToPaginationModel(r)
 	if err != nil {
+		fmt.Println(err)
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
 	clients, err := h.service.GetAll(r.Context(), pagination)
 	if err != nil {
+		fmt.Println(err)
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}

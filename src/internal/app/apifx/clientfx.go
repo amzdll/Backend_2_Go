@@ -1,4 +1,4 @@
-package http
+package apifx
 
 import (
 	"github.com/amzdll/backend_2_go/src/internal/api/client/handler"
@@ -7,16 +7,26 @@ import (
 	"go.uber.org/fx"
 )
 
-func NewClientModule() fx.Option {
+func ClientModule() fx.Option {
 	return fx.Module(
 		"client",
+
 		fx.Provide(
-			repository.New,
-			service.New,
-			handler.New,
-			NewConfig,
 			NewValidator,
 		),
-		fx.Invoke(),
+
+		fx.Provide(
+			fx.Annotate(
+				repository.New,
+				fx.As(new(service.ClientRepository)),
+			),
+
+			fx.Annotate(
+				service.New,
+				fx.As(new(handler.Service)),
+			),
+
+			AsRoute(handler.New),
+		),
 	)
 }

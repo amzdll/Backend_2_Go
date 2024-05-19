@@ -1,4 +1,4 @@
-package http
+package apifx
 
 import "go.uber.org/config"
 
@@ -9,7 +9,7 @@ type Config struct {
 
 func NewConfig(provider config.Provider) (*Config, error) {
 	var c Config
-	if err := provider.Get("http").Populate(&c); err != nil {
+	if err := provider.Get("application").Populate(&c); err != nil {
 		return nil, err
 	}
 	return &c, nil
