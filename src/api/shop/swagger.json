@@ -1,0 +1,107 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API Server for Chat Application",
+        "title": "Chat API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "127.0.0.1:8000",
+    "basePath": "/",
+    "paths": {
+        "/clients": {
+            "post": {
+                "description": "Create new client",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "clients"
+                ],
+                "summary": "Create new client",
+                "parameters": [
+                    {
+                        "description": "Request payload",
+                        "name": "text",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CreationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Message successfully sent",
+                        "schema": {
+                            "$ref": "#/definitions/response.DefaultResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "B\tad Request",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "request.CreationRequest": {
+            "type": "object",
+            "required": [
+                "address_id",
+                "birthday",
+                "gender",
+                "name",
+                "surname"
+            ],
+            "properties": {
+                "address_id": {
+                    "type": "string"
+                },
+                "birthday": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "surname": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.DefaultResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

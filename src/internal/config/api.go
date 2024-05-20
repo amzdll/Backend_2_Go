@@ -3,8 +3,9 @@ package config
 import "go.uber.org/config"
 
 type ApiConfig struct {
-	Host string `yaml:"host"`
-	Port string `yaml:"port"`
+	Stage string `yaml:"stage"`
+	Host  string `yaml:"host"`
+	Port  string `yaml:"port"`
 }
 
 func NewApiConfig(provider config.Provider) (*ApiConfig, error) {

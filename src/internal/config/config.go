@@ -5,6 +5,12 @@ import (
 	"go.uber.org/fx"
 )
 
+const (
+	EnvLocal = "local"
+	EnvDev   = "dev"
+	EnvProd  = "prod"
+)
+
 type Config struct {
 	Name string `yaml:"name"`
 }

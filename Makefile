@@ -14,3 +14,7 @@ migration-up:
 
 migration-down:
 	${LOCAL_BIN}/goose -dir ${PG_MIGRATION_DIR} postgres ${PG_DSN} down -v
+
+generate-swagger:
+	swag init -g src/cmd/shop/main.go -o src/api/shop/
+

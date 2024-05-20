@@ -9,20 +9,28 @@ import (
 	"net/http"
 )
 
+// Create
+//
+//	@Summary			Create new client
+//	@Description	Create new client
+//	@Tags			clients
+//	@Accept			json
+//	@Produce		json
+//	@Param			text	body		request.CreationRequest		true	"Request payload"
+//	@Success		201		{object}	response.DefaultResponse	"Message successfully sent"
+//	@Failure		400		{object}	response.ErrorResponse		"Bad Request"
+//	@Router			/clients [post]
 func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 	var req request.CreationRequest
 	if err := render.DecodeJSON(r.Body, &req); err != nil {
-		h.logger.Debug("Invalid request", "err", err)
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
 	if err := h.validator.Struct(req); err != nil {
-		h.logger.Debug("Invalid parameters", "err", err)
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
 	if err := h.service.Create(r.Context(), converter.ToClientInfoFromRequest(req)); err != nil {
-		h.logger.Debug("", "err", err)
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}

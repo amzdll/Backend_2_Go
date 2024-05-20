@@ -12,13 +12,11 @@ import (
 func (h *Handler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := commonConverter.RequestToPaginationModel(r)
 	if err != nil {
-		h.logger.Debug("Invalid parameters", "err", err)
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
 	clients, err := h.service.GetAll(r.Context(), pagination)
 	if err != nil {
-		h.logger.Debug("", "err", err)
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
