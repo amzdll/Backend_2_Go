@@ -1,4 +1,4 @@
-package apifx
+package api
 
 import (
 	clientHandler "github.com/amzdll/backend_2_go/src/internal/api/client/handler"
@@ -15,6 +15,6 @@ func ClientModule() fx.Option {
 		fx.Provide(
 			fx.Annotate(clientRepository.New, fx.As(new(clientService.Repository))),
 			fx.Annotate(clientService.New, fx.As(new(clientHandler.Service))),
-			AsRoute(clientHandler.New),
+			asRoute(clientHandler.New),
 		))
 }

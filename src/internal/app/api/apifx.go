@@ -1,12 +1,13 @@
-package apifx
+package api
 
 import (
 	"context"
 	"github.com/amzdll/backend_2_go/src/internal/config"
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-playground/validator/v10"
 	"go.uber.org/fx"
-	"log"
+	"log/slog"
 	"net/http"
 )
 
@@ -18,19 +19,19 @@ func Module() fx.Option {
 
 		fx.Provide(
 			config.NewApiConfig,
-			NewValidator,
-			fx.Annotate(MountHandlers, fx.ParamTags(`group:"routes"`)),
+			newValidator,
+			fx.Annotate(mountHandlers, fx.ParamTags(`group:"routes"`)),
 		),
-		fx.Invoke(StartServer),
+		fx.Invoke(startServer),
 	)
 }
 
-func StartServer(lc fx.Lifecycle, router *chi.Mux, config *config.ApiConfig) {
+func startServer(lc fx.Lifecycle, router *chi.Mux, config *config.ApiConfig, l *slog.Logger) {
 	lc.Append(fx.Hook{
-		OnStart: func(ctx context.Context) error {
+		OnStart: func(context.Context) error {
 			err := http.ListenAndServe(config.Port, router)
 			if err != nil {
-				log.Fatalf("kekw: %v", err)
+				l.Error("err", err)
 			}
 			return nil
 		},
@@ -40,26 +41,29 @@ func StartServer(lc fx.Lifecycle, router *chi.Mux, config *config.ApiConfig) {
 	})
 }
 
-type Route interface {
+type route interface {
 	Routes() *chi.Mux
 }
 
-func AsRoute(f interface{}) interface{} {
+func asRoute(f interface{}) interface{} {
 	return fx.Annotate(
 		f,
-		fx.As(new(Route)),
+		fx.As(new(route)),
 		fx.ResultTags(`group:"routes"`),
 	)
 }
 
-func MountHandlers(routers []Route) *chi.Mux {
+func mountHandlers(routers []route) *chi.Mux {
 	mainRouter := chi.NewRouter()
+
+	mainRouter.Use(middleware.Logger)
+
 	for _, router := range routers {
 		mainRouter.Mount("/", router.Routes())
 	}
 	return mainRouter
 }
 
-func NewValidator() *validator.Validate {
+func newValidator() *validator.Validate {
 	return validator.New()
 }

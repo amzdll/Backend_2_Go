@@ -11,10 +11,12 @@ func (h *Handler) DeleteById(w http.ResponseWriter, r *http.Request) {
 	idString := chi.URLParam(r, "id")
 	id, err := uuid.Parse(idString)
 	if err != nil {
+		h.logger.Debug("Invalid request", "err", err)
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
 	if err = h.service.DeleteById(r.Context(), id); err != nil {
+		h.logger.Debug("", "err", err)
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}

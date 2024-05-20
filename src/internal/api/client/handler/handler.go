@@ -7,6 +7,7 @@ import (
 	"github.com/go-chi/render"
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
+	"log/slog"
 )
 
 type Service interface {
@@ -20,11 +21,13 @@ type Service interface {
 type Handler struct {
 	service   Service
 	validator *validator.Validate
+	logger    *slog.Logger
 }
 
-func New(s Service, v *validator.Validate) *Handler {
+func New(s Service, logger *slog.Logger, v *validator.Validate) *Handler {
 	return &Handler{
 		service:   s,
+		logger:    logger,
 		validator: v,
 	}
 }
