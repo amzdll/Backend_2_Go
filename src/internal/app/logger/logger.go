@@ -6,17 +6,41 @@ import (
 	"os"
 )
 
-func setupLogger(cfg *config.LogConfig) *zerolog.Logger {
-	var logger zerolog.Logger
+type Logger struct {
+	logger *zerolog.Logger
+}
+
+func New(cfg *config.LogConfig) *Logger {
+	var l zerolog.Logger
 	switch cfg.Stage {
 	case config.EnvLocal:
-		logger = setupLocalLogger()
+		l = setupLocalLogger()
 	case config.EnvDev:
-		logger = setupDevLogger()
+		l = setupDevLogger()
 	case config.EnvProd:
-		logger = setupProdLogger()
+		l = setupProdLogger()
 	}
-	return &logger
+	return &Logger{logger: &l}
+}
+
+func (l *Logger) Info(msg string) {
+	l.logger.Info().Msg(msg)
+}
+
+func (l *Logger) Debug(msg string) {
+	l.logger.Debug().Msg(msg)
+}
+
+func (l *Logger) Error(msg string, err error) {
+	l.logger.Err(err).Msg(msg)
+}
+
+func (l *Logger) Warn(msg string) {
+	l.logger.Warn().Msg(msg)
+}
+
+func (l *Logger) Fatal(msg string, err error) {
+	l.logger.Fatal().Msg(msg)
 }
 
 func setupLocalLogger() zerolog.Logger {

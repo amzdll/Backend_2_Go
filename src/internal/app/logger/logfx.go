@@ -8,9 +8,7 @@ import (
 func Module() fx.Option {
 	return fx.Module(
 		"logger",
-		fx.Provide(
-			setupLogger,
-		),
+		fx.Provide(New),
 		fx.Provide(config.NewLogConfig),
 	)
 }
