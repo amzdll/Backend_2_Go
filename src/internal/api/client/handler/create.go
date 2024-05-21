@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"github.com/amzdll/backend_2_go/src/internal/api/client/converter"
 	"github.com/amzdll/backend_2_go/src/internal/api/client/request"
 	"github.com/nicklaw5/go-respond"
 
@@ -16,12 +15,12 @@ import (
 //	@Tags			clients
 //	@Accept			json
 //	@Produce		json
-//	@Param			text	body		request.CreationRequest		true	"Request payload"
+//	@Param			text	body		request.CreateRequest		true	"Request payload"
 //	@Success		201		{object}	response.DefaultResponse	"Message successfully sent"
 //	@Failure		400		{object}	response.ErrorResponse		"Bad Request"
 //	@Router			/clients [post]
 func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
-	var req request.CreationRequest
+	var req request.CreateRequest
 	if err := render.DecodeJSON(r.Body, &req); err != nil {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
@@ -30,7 +29,7 @@ func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
-	if err := h.service.Create(r.Context(), converter.ToClientInfoFromRequest(req)); err != nil {
+	if err := h.service.Create(r.Context(), req.ToClientInfo()); err != nil {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}

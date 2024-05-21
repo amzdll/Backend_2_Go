@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"github.com/amzdll/backend_2_go/src/internal/api/client/converter"
 	"github.com/amzdll/backend_2_go/src/internal/api/client/response"
 	commonConverter "github.com/amzdll/backend_2_go/src/internal/api/common/converter"
 	"github.com/amzdll/backend_2_go/src/internal/model"
@@ -32,7 +31,7 @@ func (h *Handler) GetAll(w http.ResponseWriter, r *http.Request) {
 	}
 	res := make([]response.ClientResponse, len(clients))
 	for i, client := range clients {
-		res[i] = converter.ModelToClientResponse(client)
+		res[i].From(client)
 	}
 	respond.NewResponse(w).DefaultMessage().Ok(res)
 }

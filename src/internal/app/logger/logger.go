@@ -16,6 +16,7 @@ func New(cfg *config.LogConfig) *Logger {
 	case config.EnvLocal:
 		l = setupLocalLogger()
 	case config.EnvDev:
+
 		l = setupDevLogger()
 	case config.EnvProd:
 		l = setupProdLogger()

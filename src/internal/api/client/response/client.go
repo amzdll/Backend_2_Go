@@ -1,6 +1,7 @@
 package response
 
 import (
+	"github.com/amzdll/backend_2_go/src/internal/model"
 	"github.com/google/uuid"
 	"time"
 )
@@ -15,6 +16,12 @@ type ClientResponse struct {
 	AddressId        uuid.UUID `json:"address_id"`
 }
 
-type ClientListResponse struct {
-	Clients []ClientResponse
+func (cr *ClientResponse) From(m model.Client) {
+	cr.Id = m.Id
+	cr.ClientName = m.ClientName
+	cr.ClientSurname = m.ClientSurname
+	cr.Birthday = m.Birthday
+	cr.Gender = m.Gender
+	cr.RegistrationDate = m.RegistrationDate
+	cr.AddressId = m.AddressId
 }

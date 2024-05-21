@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"github.com/amzdll/backend_2_go/src/internal/api/client/converter"
 	"github.com/amzdll/backend_2_go/src/internal/api/client/request"
 	"github.com/go-chi/render"
 	"github.com/nicklaw5/go-respond"
@@ -15,12 +14,12 @@ import (
 //	@Tags           clients
 //	@Accept         json
 //	@Produce        json
-//	@Param          body    body    request.UpdationRequest     true    "Update Client Address Request"
+//	@Param          body    body    request.UpdateRequest     true    "Update Client Address Request"
 //	@Success        200     {object}    response.DefaultResponse     "Message successfully sent"
 //	@Failure        400     {object}    response.ErrorResponse      "bad request"
 //	@Router         /clients [put]
 func (h *Handler) UpdateAddress(w http.ResponseWriter, r *http.Request) {
-	var req request.UpdationRequest
+	var req request.UpdateRequest
 	if err := render.DecodeJSON(r.Body, &req); err != nil {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
@@ -29,7 +28,7 @@ func (h *Handler) UpdateAddress(w http.ResponseWriter, r *http.Request) {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
-	if err := h.service.UpdateClient(r.Context(), converter.ToClientFromUpdateAddressRequest(req)); err != nil {
+	if err := h.service.UpdateClient(r.Context(), req.ToClient()); err != nil {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}

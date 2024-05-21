@@ -41,8 +41,8 @@ func startServer(lc fx.Lifecycle, router *chi.Mux, config *config.ApiConfig, l *
 
 func setupMainRouter(routers []route, cfg *config.ApiConfig, logger *logger.Logger) *chi.Mux {
 	mainRouter := chi.NewRouter()
-	lm := apiMiddleware.NewLogger(logger)
-	mainRouter.Use(lm.Log)
+	l := apiMiddleware.NewLogger(logger)
+	mainRouter.Use(l.Logger)
 	if cfg.Stage == config.EnvLocal || cfg.Stage == config.EnvDev {
 		logger.Info(
 			fmt.Sprintf(
