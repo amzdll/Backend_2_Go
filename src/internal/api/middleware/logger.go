@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-type log interface {
+type logger interface {
 	Info(msg string)
 	Debug(msg string)
 	Error(msg string, err error)
@@ -16,18 +16,18 @@ type log interface {
 }
 
 type Logger struct {
-	log log
+	logger logger
 }
 
-func NewLogger(l log) *Logger {
-	return &Logger{log: l}
+func NewLogger(l logger) *Logger {
+	return &Logger{logger: l}
 }
 
 func (l *Logger) Logger(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ww := middleware.NewWrapResponseWriter(w, r.ProtoMajor)
 		next.ServeHTTP(ww, r)
-		l.log.Info(
+		l.logger.Info(
 			fmt.Sprintf("method=%s path=%s remote_addr=%s request_id=%s status=%d",
 				r.Method, r.URL.Path, r.RemoteAddr, middleware.GetReqID(r.Context()), ww.Status()),
 		)
