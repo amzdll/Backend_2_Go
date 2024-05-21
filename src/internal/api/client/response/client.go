@@ -14,3 +14,7 @@ type ClientResponse struct {
 	RegistrationDate time.Time `json:"registration_date"`
 	AddressId        uuid.UUID `json:"address_id"`
 }
+
+type ClientListResponse struct {
+	Clients []ClientResponse
+}

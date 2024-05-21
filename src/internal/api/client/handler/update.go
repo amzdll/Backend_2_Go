@@ -8,6 +8,17 @@ import (
 	"net/http"
 )
 
+// UpdateAddress
+//
+//	@Summary        Update client address
+//	@Description    Updates a client's address
+//	@Tags           clients
+//	@Accept         json
+//	@Produce        json
+//	@Param          body    body    request.UpdationRequest     true    "Update Client Address Request"
+//	@Success        200     {object}    response.DefaultResponse     "Message successfully sent"
+//	@Failure        400     {object}    response.ErrorResponse      "bad request"
+//	@Router         /clients [put]
 func (h *Handler) UpdateAddress(w http.ResponseWriter, r *http.Request) {
 	var req request.UpdationRequest
 	if err := render.DecodeJSON(r.Body, &req); err != nil {

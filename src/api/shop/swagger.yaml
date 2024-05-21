@@ -19,6 +19,33 @@ definitions:
     - name
     - surname
     type: object
+  request.UpdationRequest:
+    properties:
+      address_id:
+        type: string
+      id:
+        type: string
+    required:
+    - address_id
+    - id
+    type: object
+  response.ClientResponse:
+    properties:
+      address_id:
+        type: string
+      birthday:
+        type: string
+      client_name:
+        type: string
+      client_surname:
+        type: string
+      gender:
+        type: string
+      id:
+        type: string
+      registration_date:
+        type: string
+    type: object
   response.DefaultResponse:
     properties:
       message:
@@ -43,6 +70,26 @@ info:
   version: "1.0"
 paths:
   /clients:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves all clients
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Clients successfully get
+          schema:
+            items:
+              $ref: '#/definitions/response.ClientResponse'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: Get all clients
+      tags:
+      - clients
     post:
       consumes:
       - application/json
@@ -62,10 +109,60 @@ paths:
           schema:
             $ref: '#/definitions/response.DefaultResponse'
         "400":
-          description: "B\tad Request"
+          description: Bad Request
           schema:
             $ref: '#/definitions/response.ErrorResponse'
       summary: Create new client
+      tags:
+      - clients
+    put:
+      consumes:
+      - application/json
+      description: Updates a client's address
+      parameters:
+      - description: Update Client Address Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdationRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Message successfully sent
+          schema:
+            $ref: '#/definitions/response.DefaultResponse'
+        "400":
+          description: bad request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: Update client address
+      tags:
+      - clients
+  /clients/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a client based on the provided ID
+      parameters:
+      - description: Client ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Message successfully sent
+          schema:
+            $ref: '#/definitions/response.DefaultResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: Delete a client by ID
       tags:
       - clients
 swagger: "2.0"

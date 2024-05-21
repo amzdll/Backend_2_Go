@@ -2,26 +2,32 @@ package logger
 
 import (
 	"github.com/amzdll/backend_2_go/src/internal/config"
-	"log/slog"
+	"github.com/rs/zerolog"
 	"os"
 )
 
-func setupLogger(cfg *config.LogConfig) *slog.Logger {
-	var log *slog.Logger
-
+func setupLogger(cfg *config.LogConfig) *zerolog.Logger {
+	var logger zerolog.Logger
 	switch cfg.Stage {
 	case config.EnvLocal:
-		log = slog.New(
-			slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}),
-		)
+		logger = setupLocalLogger()
 	case config.EnvDev:
-		log = slog.New(
-			slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}),
-		)
+		logger = setupDevLogger()
 	case config.EnvProd:
-		log = slog.New(
-			slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo}),
-		)
+		logger = setupProdLogger()
 	}
-	return log
+	return &logger
+}
+
+func setupLocalLogger() zerolog.Logger {
+	output := zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: "15:04:05 02/01/2006"}
+	return zerolog.New(output).Level(zerolog.DebugLevel).With().Timestamp().Logger()
+}
+
+func setupDevLogger() zerolog.Logger {
+	return zerolog.New(os.Stdout).Level(zerolog.DebugLevel).With().Timestamp().Logger()
+}
+
+func setupProdLogger() zerolog.Logger {
+	return zerolog.New(os.Stdout).Level(zerolog.InfoLevel).With().Timestamp().Logger()
 }

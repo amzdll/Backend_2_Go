@@ -7,6 +7,17 @@ import (
 	"net/http"
 )
 
+// DeleteById
+//
+//	@Summary        Delete a client by ID
+//	@Description    Deletes a client based on the provided ID
+//	@Tags           clients
+//	@Accept         json
+//	@Produce        json
+//	@Param          id      path    string      true        "Client ID"
+//	@Success        200     {object}    response.DefaultResponse      "Message successfully sent"
+//	@Failure        400     {object}    response.ErrorResponse      "Bad Request"
+//	@Router         /clients/{id} [delete]
 func (h *Handler) DeleteById(w http.ResponseWriter, r *http.Request) {
 	idString := chi.URLParam(r, "id")
 	id, err := uuid.Parse(idString)

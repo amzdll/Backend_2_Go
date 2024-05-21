@@ -9,6 +9,16 @@ import (
 	"net/http"
 )
 
+// GetAll
+//
+// @Summary Get all clients
+// @Description Retrieves all clients
+// @Tags clients
+// @Accept json
+// @Produce json
+// @Success 200 {array} response.ClientResponse "Clients successfully get"
+// @Failure 400 {object} response.ErrorResponse "Bad Request"
+// @Router /clients [get]
 func (h *Handler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := commonConverter.RequestToPaginationModel(r)
 	if err != nil {
