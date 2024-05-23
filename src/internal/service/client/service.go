@@ -18,6 +18,6 @@ type ClientService struct {
 	repository Repository
 }
 
-func New(cr Repository) *ClientService {
-	return &ClientService{repository: cr}
+func New(r Repository) *ClientService {
+	return &ClientService{repository: r}
 }

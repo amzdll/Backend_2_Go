@@ -11,7 +11,7 @@ import (
 //
 //	@Summary        Delete a client by ID
 //	@Description    Deletes a client based on the provided ID
-//	@Tags           clients
+//	@Tags           Clients
 //	@Accept         json
 //	@Produce        json
 //	@Param          id      path    string      true        "Client ID"

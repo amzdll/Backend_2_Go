@@ -12,7 +12,7 @@ import (
 //
 //	@Summary			Create new client
 //	@Description	Create new client
-//	@Tags			clients
+//	@Tags			Clients
 //	@Accept			json
 //	@Produce		json
 //	@Param			text	body		request.CreateRequest		true	"Request payload"

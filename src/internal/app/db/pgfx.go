@@ -31,6 +31,7 @@ func newPool(l *logger.Logger, config *db.Config) (*pgxpool.Pool, error) {
 	}
 	if err = pool.Ping(ctx); err != nil {
 		l.Error("Failed to connect to database.", err)
+		return nil, err
 	}
 	l.Info("Database connection pool has been opened.")
 	return pool, nil

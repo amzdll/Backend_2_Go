@@ -11,7 +11,7 @@ import (
 //
 //	@Summary        Update client address
 //	@Description    Updates a client's address
-//	@Tags           clients
+//	@Tags           Clients
 //	@Accept         json
 //	@Produce        json
 //	@Param          body    body    request.UpdateRequest     true    "Update Client Address Request"

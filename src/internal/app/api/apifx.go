@@ -17,8 +17,10 @@ func Module() fx.Option {
 	return fx.Module(
 		"server",
 		fx.Options(ClientModule()),
+
 		fx.Provide(fx.Annotate(setupMainRouter, fx.ParamTags(`group:"routes"`))),
 		fx.Provide(config.NewApiConfig),
+
 		fx.Invoke(startServer),
 	)
 }
@@ -26,11 +28,13 @@ func Module() fx.Option {
 func startServer(lc fx.Lifecycle, router *chi.Mux, config *config.ApiConfig, l *logger.Logger) {
 	lc.Append(fx.Hook{
 		OnStart: func(context.Context) error {
-			l.Info("Server has started successfully.")
+
 			err := http.ListenAndServe(config.Port, router)
 			if err != nil {
 				l.Error("Cannot start server", err)
+				return err
 			}
+			l.Info("Server has started successfully.")
 			return nil
 		},
 		OnStop: func(context context.Context) error {

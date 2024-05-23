@@ -12,7 +12,7 @@ import (
 //
 // @Summary Get all clients
 // @Description Retrieves all clients
-// @Tags clients
+// @Tags Clients
 // @Accept json
 // @Produce json
 // @Success 200 {array} response.ClientResponse "Clients successfully get"
