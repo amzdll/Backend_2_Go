@@ -5,6 +5,6 @@ import (
 	"github.com/google/uuid"
 )
 
-func (cs ClientService) DeleteById(ctx context.Context, id uuid.UUID) error {
-	return cs.repository.DeleteById(ctx, id)
+func (s ClientService) DeleteById(ctx context.Context, id uuid.UUID) error {
+	return s.repository.DeleteById(ctx, id)
 }
