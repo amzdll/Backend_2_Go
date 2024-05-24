@@ -6,19 +6,19 @@ import (
 )
 
 type Client struct {
-	Id               uuid.UUID
-	ClientName       string
-	ClientSurname    string
-	Birthday         time.Time
-	Gender           string
-	RegistrationDate time.Time
-	AddressId        uuid.UUID
+	Id               uuid.UUID `db:"id"`
+	ClientName       string    `db:"client_name"`
+	ClientSurname    string    `db:"client_surname"`
+	Birthday         time.Time `db:"birthday"`
+	Gender           string    `db:"gender"`
+	RegistrationDate time.Time `db:"registration_date"`
+	AddressId        uuid.UUID `db:"address_id"`
 }
 
 type ClientInfo struct {
-	ClientName    string
-	ClientSurname string
-	Birthday      time.Time
-	Gender        string
-	AddressId     uuid.UUID
+	ClientName    string    `db:"client_name"`
+	ClientSurname string    `db:"client_surname"`
+	Birthday      time.Time `db:"birthday"`
+	Gender        string    `db:"gender"`
+	AddressId     uuid.UUID `db:"address_id"`
 }

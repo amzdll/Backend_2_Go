@@ -26,7 +26,7 @@ func (h *Handler) DeleteById(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err = h.service.DeleteById(r.Context(), id); err != nil {
-		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
+		respond.NewResponse(w).DefaultMessage().NotFound(nil)
 		return
 	}
 	respond.NewResponse(w).DefaultMessage().Ok(nil)

@@ -3,12 +3,9 @@ package repository
 import (
 	"context"
 	"github.com/amzdll/backend_2_go/src/internal/model"
+	"github.com/amzdll/backend_2_go/src/pkg/pgrepository"
 )
 
-func (repository ClientRepository) Create(ctx context.Context, client model.ClientInfo) error {
-	const query = `insert into client (client_name, client_surname, birthday, gender, address_id) values ($1, $2, $3, $4, $5)`
-	_, err := repository.db.Exec(
-		ctx, query, client.ClientName, client.ClientSurname, client.Birthday, client.Gender, client.AddressId,
-	)
-	return err
+func (r ClientRepository) Create(ctx context.Context, client model.ClientInfo) error {
+	return pgrepository.Create(r.table, r.db, ctx, client)
 }

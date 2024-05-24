@@ -10,6 +10,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	httpSwagger "github.com/swaggo/http-swagger"
 	"go.uber.org/fx"
+	"net"
 	"net/http"
 )
 
@@ -28,9 +29,13 @@ func Module() fx.Option {
 func startServer(lc fx.Lifecycle, router *chi.Mux, config *config.ApiConfig, l *logger.Logger) {
 	lc.Append(fx.Hook{
 		OnStart: func(context.Context) error {
-
-			err := http.ListenAndServe(config.Port, router)
+			listener, err := net.Listen("tcp", config.Port)
 			if err != nil {
+				l.Error("Cannot start server", err)
+				return err
+			}
+			l.Info("Server has started successfully.")
+			if err = http.Serve(listener, router); err != nil {
 				l.Error("Cannot start server", err)
 				return err
 			}

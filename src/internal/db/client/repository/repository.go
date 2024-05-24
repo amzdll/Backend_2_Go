@@ -5,9 +5,10 @@ import (
 )
 
 type ClientRepository struct {
-	db *pgxpool.Pool
+	db    *pgxpool.Pool
+	table string
 }
 
 func New(db *pgxpool.Pool) *ClientRepository {
-	return &ClientRepository{db: db}
+	return &ClientRepository{db: db, table: "client"}
 }
