@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/amzdll/backend_2_go/src/internal/api/client/request"
+	"github.com/amzdll/backend_2_go/src/pkg/pgrepository"
 	"github.com/go-chi/render"
 	"github.com/nicklaw5/go-respond"
 	"net/http"
@@ -28,6 +29,7 @@ func (h *Handler) UpdateAddress(w http.ResponseWriter, r *http.Request) {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return
 	}
+	pgrepository.GenerateWhereQuery([]string{"Id"}, []string{"address_id"}, req.ToClient())
 	if err := h.service.UpdateClient(r.Context(), req.ToClient()); err != nil {
 		respond.NewResponse(w).DefaultMessage().BadRequest(nil)
 		return

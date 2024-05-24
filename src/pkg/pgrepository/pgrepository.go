@@ -15,7 +15,7 @@ func Create(table string, pool *pgxpool.Pool, ctx context.Context, data any) err
 	if err := checkData(data); err != nil {
 		return err
 	}
-	td := parseData(data)
+	td := parseCreateData(data)
 	query := fmt.Sprintf(`insert into %s (%s) values (%s)`,
 		table,
 		strings.Join(td.columns, ", "),
@@ -26,25 +26,23 @@ func Create(table string, pool *pgxpool.Pool, ctx context.Context, data any) err
 	return err
 }
 
-func GetWithFilters[T any](table string, pool *pgxpool.Pool, ctx context.Context, filters []string, data interface{}) ([]T, error) {
+func GetWithFilters[T any](
+	table string, pool *pgxpool.Pool, ctx context.Context, filters []string, data interface{},
+) ([]T, error) {
 	err := checkData(data)
 	if err != nil {
 		return nil, err
 	}
-
 	dataType := reflect.TypeOf(data)
 	dataValue := reflect.ValueOf(data)
-
 	var values []interface{}
 	var filter strings.Builder
-
 	for _, filterName := range filters {
 		field, found := dataType.FieldByName(filterName)
 		if !found {
 			return nil, fmt.Errorf("field %s not found in struct", filterName)
 		}
 		fieldValue := dataValue.FieldByName(filterName)
-
 		values = append(values, fieldValue.Interface())
 		filter.WriteString(field.Tag.Get("db") + " = ? AND ")
 	}
@@ -55,7 +53,6 @@ func GetWithFilters[T any](table string, pool *pgxpool.Pool, ctx context.Context
 	var list []T
 
 	query := fmt.Sprintf("SELECT * FROM %s WHERE %s", table, filterStr)
-	fmt.Println(query)
 	err = pgxscan.Select(ctx, pool, &list, query, values...)
 	if err != nil {
 		return nil, err
@@ -73,6 +70,13 @@ func GetAll[T any](table string, pool *pgxpool.Pool, ctx context.Context, pagina
 		return nil, err
 	}
 	return list, nil
+}
+
+func Update(
+	table string, pool *pgxpool.Pool, ctx context.Context, filters []string, data interface{},
+) error {
+
+	return nil
 }
 
 func Delete(table string, pool *pgxpool.Pool, ctx context.Context, id uuid.UUID) error {
