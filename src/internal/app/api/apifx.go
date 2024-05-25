@@ -18,10 +18,8 @@ func Module() fx.Option {
 	return fx.Module(
 		"server",
 		fx.Options(ClientModule()),
-
 		fx.Provide(fx.Annotate(setupMainRouter, fx.ParamTags(`group:"routes"`))),
 		fx.Provide(config.NewApiConfig),
-
 		fx.Invoke(startServer),
 	)
 }

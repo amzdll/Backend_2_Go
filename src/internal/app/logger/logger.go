@@ -41,7 +41,7 @@ func (l *Logger) Warn(msg string) {
 }
 
 func (l *Logger) Fatal(msg string, err error) {
-	l.logger.Fatal().Msg(msg)
+	l.logger.Fatal().Err(err).Msg(msg)
 }
 
 func setupLocalLogger() zerolog.Logger {

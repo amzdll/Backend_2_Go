@@ -29,7 +29,8 @@ func (l *Logger) Logger(next http.Handler) http.Handler {
 		next.ServeHTTP(ww, r)
 		l.logger.Info(
 			fmt.Sprintf("method=%s path=%s remote_addr=%s request_id=%s status=%d",
-				r.Method, r.URL.Path, r.RemoteAddr, middleware.GetReqID(r.Context()), ww.Status()),
+				r.Method, r.URL.Path, r.RemoteAddr, middleware.GetReqID(r.Context()), ww.Status(),
+			),
 		)
 	})
 }

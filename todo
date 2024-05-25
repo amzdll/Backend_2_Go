@@ -1,8 +1,0 @@
-documentation generation
-swagger generation
-migrating the project to docker
-linter
-
-
-adding middleware for data validation from r.Body
-(possibly) changing the handle parameters from r http.Request to r entityRequest

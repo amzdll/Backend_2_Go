@@ -14,12 +14,12 @@ type CreateRequest struct {
 	AddressId     uuid.UUID `json:"address_id" validate:"required"`
 }
 
-func (cr *CreateRequest) ToClientInfo() model.ClientInfo {
+func (r *CreateRequest) ToClientInfo() model.ClientInfo {
 	return model.ClientInfo{
-		ClientName:    cr.ClientName,
-		ClientSurname: cr.ClientSurname,
-		Birthday:      cr.Birthday,
-		Gender:        cr.Gender,
-		AddressId:     cr.AddressId,
+		ClientName:    r.ClientName,
+		ClientSurname: r.ClientSurname,
+		Birthday:      r.Birthday,
+		Gender:        r.Gender,
+		AddressId:     r.AddressId,
 	}
 }
