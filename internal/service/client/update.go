@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"github.com/amzdll/backend_2_go/src/internal/model"
+	"github.com/amzdll/shop/internal/model"
 )
 
 func (s ClientService) UpdateClient(ctx context.Context, data model.Client) error {

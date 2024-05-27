@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"github.com/amzdll/backend_2_go/src/internal/model"
+	"github.com/amzdll/shop/internal/model"
 	"github.com/georgysavva/scany/v2/pgxscan"
 )
 

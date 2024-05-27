@@ -1,7 +1,7 @@
 package logger
 
 import (
-	"github.com/amzdll/backend_2_go/src/internal/config"
+	"github.com/amzdll/shop/internal/config"
 	"github.com/rs/zerolog"
 	"os"
 )
@@ -10,7 +10,7 @@ type Logger struct {
 	logger *zerolog.Logger
 }
 
-func New(cfg *config.LogConfig) *Logger {
+func NewLogger(cfg *config.LogConfig) *Logger {
 	var l zerolog.Logger
 	switch cfg.Stage {
 	case config.EnvLocal:
@@ -21,6 +21,7 @@ func New(cfg *config.LogConfig) *Logger {
 	case config.EnvProd:
 		l = setupProdLogger()
 	}
+	l.Info().Msg("Logger initialized")
 	return &Logger{logger: &l}
 }
 

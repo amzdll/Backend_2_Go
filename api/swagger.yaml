@@ -1,6 +1,6 @@
 basePath: /
 definitions:
-  request.CreationRequest:
+  request.CreateRequest:
     properties:
       address_id:
         type: string
@@ -19,7 +19,7 @@ definitions:
     - name
     - surname
     type: object
-  request.UpdationRequest:
+  request.UpdateRequest:
     properties:
       address_id:
         type: string
@@ -65,7 +65,7 @@ definitions:
 host: 127.0.0.1:8000
 info:
   contact: {}
-  description: API Server for Chat Application
+  description: Shop Api
   title: Chat API
   version: "1.0"
 paths:
@@ -89,7 +89,7 @@ paths:
             $ref: '#/definitions/response.ErrorResponse'
       summary: Get all clients
       tags:
-      - clients
+      - Clients
     post:
       consumes:
       - application/json
@@ -100,7 +100,7 @@ paths:
         name: text
         required: true
         schema:
-          $ref: '#/definitions/request.CreationRequest'
+          $ref: '#/definitions/request.CreateRequest'
       produces:
       - application/json
       responses:
@@ -114,7 +114,7 @@ paths:
             $ref: '#/definitions/response.ErrorResponse'
       summary: Create new client
       tags:
-      - clients
+      - Clients
     put:
       consumes:
       - application/json
@@ -125,7 +125,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/request.UpdationRequest'
+          $ref: '#/definitions/request.UpdateRequest'
       produces:
       - application/json
       responses:
@@ -139,7 +139,7 @@ paths:
             $ref: '#/definitions/response.ErrorResponse'
       summary: Update client address
       tags:
-      - clients
+      - Clients
   /clients/{id}:
     delete:
       consumes:
@@ -164,5 +164,5 @@ paths:
             $ref: '#/definitions/response.ErrorResponse'
       summary: Delete a client by ID
       tags:
-      - clients
+      - Clients
 swagger: "2.0"

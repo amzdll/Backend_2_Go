@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"github.com/amzdll/backend_2_go/src/internal/api/client/response"
-	commonConverter "github.com/amzdll/backend_2_go/src/internal/api/common/converter"
-	"github.com/amzdll/backend_2_go/src/internal/model"
+	"github.com/amzdll/shop/internal/api/client/response"
+	commonConverter "github.com/amzdll/shop/internal/api/common/converter"
+	"github.com/amzdll/shop/internal/model"
 	"github.com/nicklaw5/go-respond"
 	"net/http"
 )

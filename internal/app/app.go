@@ -1,11 +1,11 @@
 package app
 
 import (
-	"github.com/amzdll/backend_2_go/src/internal/app/api"
-	"github.com/amzdll/backend_2_go/src/internal/app/db"
-	"github.com/amzdll/backend_2_go/src/internal/app/logger"
-	"github.com/amzdll/backend_2_go/src/internal/app/validator"
-	"github.com/amzdll/backend_2_go/src/internal/config"
+	"github.com/amzdll/shop/internal/app/api"
+	"github.com/amzdll/shop/internal/app/db"
+	"github.com/amzdll/shop/internal/app/logger"
+	"github.com/amzdll/shop/internal/app/validator"
+	"github.com/amzdll/shop/internal/config"
 	"go.uber.org/fx"
 )
 

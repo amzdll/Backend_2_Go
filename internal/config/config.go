@@ -11,30 +11,29 @@ const (
 	EnvProd  = "prod"
 )
 
-type Config struct {
+type BaseConfig struct {
 	Name string `yaml:"name"`
 }
 
-type ResultConfig struct {
+type Config struct {
 	fx.Out
 	Provider config.Provider
-	Config   Config
+	Config   BaseConfig
 }
 
 // NewConfig todo: need relative path
-func NewConfig() (ResultConfig, error) {
-	loader, err := config.NewYAML(config.File("src/config/config.yaml"))
+func NewConfig() (Config, error) {
+	loader, err := config.NewYAML(config.File("config/config.yaml"))
 	if err != nil {
-		return ResultConfig{}, err
+		return Config{}, err
 	}
-
-	config := Config{
+	cfg := BaseConfig{
 		Name: "default",
 	}
+	if err = loader.Get("app").Populate(&cfg); err != nil {
 
-	if err = loader.Get("app").Populate(&config); err != nil {
-		return ResultConfig{}, err
+		return Config{}, err
 	}
 
-	return ResultConfig{Provider: loader}, nil
+	return Config{Provider: loader}, nil
 }

@@ -1,14 +1,14 @@
 package logger
 
 import (
-	"github.com/amzdll/backend_2_go/src/internal/config"
+	"github.com/amzdll/shop/internal/config"
 	"go.uber.org/fx"
 )
 
 func Module() fx.Option {
 	return fx.Module(
 		"logger",
-		fx.Provide(New),
+		fx.Provide(NewLogger),
 		fx.Provide(config.NewLogConfig),
 	)
 }

@@ -3,8 +3,8 @@ package db
 import (
 	"context"
 	"fmt"
-	"github.com/amzdll/backend_2_go/src/internal/app/logger"
-	"github.com/amzdll/backend_2_go/src/internal/config/db"
+	"github.com/amzdll/shop/internal/app/logger"
+	"github.com/amzdll/shop/internal/config/db"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"go.uber.org/fx"
 )

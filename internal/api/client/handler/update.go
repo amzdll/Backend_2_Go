@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/amzdll/backend_2_go/src/internal/api/client/request"
+	"github.com/amzdll/shop/internal/api/client/request"
 	"github.com/go-chi/render"
 	"github.com/nicklaw5/go-respond"
 	"net/http"

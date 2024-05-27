@@ -1,9 +1,9 @@
 package api
 
 import (
-	clientHandler "github.com/amzdll/backend_2_go/src/internal/api/client/handler"
-	clientRepository "github.com/amzdll/backend_2_go/src/internal/db/client/repository"
-	clientService "github.com/amzdll/backend_2_go/src/internal/service/client"
+	clientHandler "github.com/amzdll/shop/internal/api/client/handler"
+	clientRepository "github.com/amzdll/shop/internal/db/client/repository"
+	clientService "github.com/amzdll/shop/internal/service/client"
 
 	"go.uber.org/fx"
 )

@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"github.com/amzdll/backend_2_go/src/internal/model"
+	"github.com/amzdll/shop/internal/model"
 )
 
 func (r ClientRepository) UpdateAddress(ctx context.Context, data model.Client) error {

@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "API Server for Chat Application",
+        "description": "Shop Api",
         "title": "Chat API",
         "contact": {},
         "version": "1.0"
@@ -19,7 +19,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "clients"
+                    "Clients"
                 ],
                 "summary": "Get all clients",
                 "responses": {
@@ -49,7 +49,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "clients"
+                    "Clients"
                 ],
                 "summary": "Update client address",
                 "parameters": [
@@ -59,7 +59,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.UpdationRequest"
+                            "$ref": "#/definitions/request.UpdateRequest"
                         }
                     }
                 ],
@@ -87,7 +87,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "clients"
+                    "Clients"
                 ],
                 "summary": "Create new client",
                 "parameters": [
@@ -97,7 +97,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.CreationRequest"
+                            "$ref": "#/definitions/request.CreateRequest"
                         }
                     }
                 ],
@@ -127,7 +127,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "clients"
+                    "Clients"
                 ],
                 "summary": "Delete a client by ID",
                 "parameters": [
@@ -157,7 +157,7 @@
         }
     },
     "definitions": {
-        "request.CreationRequest": {
+        "request.CreateRequest": {
             "type": "object",
             "required": [
                 "address_id",
@@ -184,7 +184,7 @@
                 }
             }
         },
-        "request.UpdationRequest": {
+        "request.UpdateRequest": {
             "type": "object",
             "required": [
                 "address_id",

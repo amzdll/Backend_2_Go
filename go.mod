@@ -1,4 +1,4 @@
-module github.com/amzdll/backend_2_go
+module github.com/amzdll/shop
 
 go 1.21.1
 
