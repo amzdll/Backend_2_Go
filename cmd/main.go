@@ -15,6 +15,7 @@ import (
 func main() {
 	ctx := context.Background()
 	application := app.CreateApp()
+	log.Info().Msg("hadfsjlk;")
 	err := application.Start(ctx)
 	if err != nil {
 		log.Err(err)

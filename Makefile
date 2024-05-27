@@ -1,13 +1,11 @@
 include .env
 
-LOCAL_BIN:=$(CURDIR)/bin
-
 install-deps:
 	# Migration
-	GOBIN=$(LOCAL_BIN) go install github.com/pressly/goose/v3/cmd/goose@latest
+	GOBIN=${LOCAL_BIN} go install github.com/pressly/goose/v3/cmd/goose@latest
 
 	# Swagger
-	GOBIN=$(LOCAL_BIN) go install github.com/swaggo/swag/cmd/swag@latest
+	GOBIN=${LOCAL_BIN} go install github.com/swaggo/swag/cmd/swag@latest
 
 migration-status:
 	${LOCAL_BIN}/goose -dir ${PG_MIGRATION_DIR} postgres ${PG_DSN} status -v

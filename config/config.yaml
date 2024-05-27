@@ -6,7 +6,7 @@ pg:
   name: "shop"
   user: "postgres"
   password: "postgres"
-  host: "127.0.0.1"
+  host: "pg"
   port: "5432"
   ssl_mode: "disable"
   dsn_template: "host=%s port=%s dbname=%s user=%s password=%s sslmode=%s"
