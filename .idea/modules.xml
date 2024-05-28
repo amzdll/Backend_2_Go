@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Shop.iml" filepath="$PROJECT_DIR$/.idea/Shop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ShopAuth/.idea/ShopAuth.iml" filepath="$PROJECT_DIR$/../ShopAuth/.idea/ShopAuth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Tasks/.idea/archive.iml" filepath="$PROJECT_DIR$/../Tasks/.idea/archive.iml" />
+    </modules>
+  </component>
+</project>
