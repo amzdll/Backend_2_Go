@@ -1,10 +1,11 @@
-FROM golang:1.22.3-alpine3.20 AS builder
+FROM golang:1.22.3-alpine3.20
+#  AS builder
 
-COPY . /shop
-WORKDIR /shop
+COPY . /project/shop
+WORKDIR /project/shop
 
 RUN go mod download
-RUN go build -o ./bin/main cmd/main.go
+CMD go build -o ./bin/main cmd/main.go
 
 #FROM alpine:3.20
 #
